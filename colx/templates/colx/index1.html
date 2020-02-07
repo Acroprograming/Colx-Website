@@ -1,0 +1,21 @@
+{% extends "colx/navbar.html" %}
+{% block content %}
+<div class="container">
+  <h2>Items Available For Purchase</h2>
+  <div class="row">
+      {% for item in items %}
+      <div class="col-sm-3">
+        <div class="panel panel-default">
+          <div class="panel-heading"><h4>{{ item.item_name }}</h4></div>
+          <div class="panel-body">
+            <img src="{{ item.img }}" style="height: 300px;width: 225px;"/>
+            <h6 class="text-right"><kbd class="bg-primary">&#8377 {{ item.price }}</kbd></h6>
+          </div>
+          <div class="panel-footer  ">{{ item.description }}
+           </div>
+        </div>
+      </div>
+      {% endfor %}
+  </div>
+</div>
+{% endblock content %}
