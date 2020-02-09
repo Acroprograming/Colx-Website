@@ -28,6 +28,7 @@ def login(request):
 			err="No user exist with this roll number"
 		else:
 			if(user.password==password):
+				request.session['roll_number']=user.roll_number
 				request.session['id']=user.id
 				return HttpResponseRedirect(reverse('colx:index'))
 			else:
@@ -36,10 +37,13 @@ def login(request):
 def logout(request):
 	try:
 		del request.session['id']
+		del request.session['roll_number']
 	except KeyError:
 		pass
 	return HttpResponseRedirect(reverse('colx:index'))
 def signup(request):
+	form=StudentForm()
+	err=""
 	if(request.method =='POST'):
 		form=StudentForm(request.POST)
 		if(form.is_valid()):
@@ -52,13 +56,21 @@ def signup(request):
 			pwd=form.cleaned_data['password']
 			mob=form.cleaned_data['mobile_no']
 			email=form.cleaned_data['email']
-			student=Student(fname=fname,lname=lname,roll_number=roll,year=year,class_field=clas,section=section,password=pwd,mobile_no=mob,email=email)
-			student.save()
-			return HttpResponseRedirect(reverse('colx:index'))
+			try:
+				user=Student(fname=fname,lname=lname,roll_number=roll,year=year,class_field=clas,section=section,password=pwd,mobile_no=mob,email=email)
+				user.save()
+
+			except:
+				err="user already exists"
+				return render(request,'colx/signup.html',{'form': form,'err':err})
+			else:
+				request.session['roll_number']=user.roll_number
+				request.session['id']=user.id
+				return HttpResponseRedirect(reverse('colx:index'))
 		else:
-			return HttpResponse(form.errors.as_data())
+			return render(request,'colx/signup.html',{'form': form,'err':err})
 	else:
-		return render(request,'colx/signup.html',{'form': StudentForm})
+		return render(request,'colx/signup.html',{'form': form,'err':err})
 def sell(request):
 	try:
 		seller_obj=Student.objects.get(id=request.session["id"])
