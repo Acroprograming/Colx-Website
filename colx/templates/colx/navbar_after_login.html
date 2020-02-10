@@ -1,0 +1,24 @@
+  <!-- navbaar after login-->
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'colx:index' %}">Colx</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="{% url 'colx:index' %}">Home</a></li>
+      <li><a href="{% url 'colx:sell' %}">Sell</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li></li>
+    </ul>
+  </div>
+</nav> 
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> {{ request.session["id"] }}
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a href="#">Cart</a></li>
+      <li><a href="#">Your orders</a></li>
+      <li><a href="{% url 'colx:logout' %}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+    </ul>
+</div>

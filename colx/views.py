@@ -1,11 +1,12 @@
 from django.shortcuts import render ,get_object_or_404
 from django.template import loader
 from django.http import HttpResponse ,HttpResponseRedirect
-from .models import Item, Student
+from .models import Item, Student ,Cart
 from django.views import generic
 from .forms import StudentForm , SignInForm
 from django.urls import reverse
 from django.core.files.storage import FileSystemStorage
+from django.contrib import messages
 
 # Create your views here.
 class IndexView(generic.ListView):
@@ -14,6 +15,30 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         """Return the items not sold."""
         return Item.objects.filter(status='not sold')
+def cart(request):
+	try:
+		roll_number=request.session['roll_number']
+		student=Student.objects.get(roll_number=roll_number)
+		items=Cart.objects.filter(studentroll=student)
+		return render(request,"colx/cart.html",{'items':items})
+	except Exception as e:
+		messages.error(request,"No Item in Cart" +str(e) )
+		return HttpResponseRedirect(reverse('colx:index'))
+def add_to_cart(request,item_no):
+	try:
+		roll_number=request.session['roll_number']
+		item=Item.objects.get(item_no=item_no)
+
+		student=Student.objects.get(roll_number=roll_number)
+		cart=Cart(itemitem_no=item,studentroll=student)
+		cart.save()
+		messages.success(request,item.item_name+" Added To Cart")
+		return HttpResponseRedirect(reverse('colx:index'))
+	except KeyError:
+		err="You need to login first"
+		form=SignInForm()
+		return render(request,'colx/login2.html',{'form': form,'err':err})
+
 def login(request):
 	form=SignInForm()
 	err=""
