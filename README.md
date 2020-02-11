@@ -16,4 +16,15 @@ How To use:
 5. Run the project using command "py manage.py runserver"
 6. Visit url "127.0.0.1/colx" to see the webpage running
 It would look similar too (After adding items for sale ):
-![Image of Colx-website](https://github.com/Acroprograming/Colx-Website/blob/master/colx/static/screenshot%20at%2011%20Feb%202020.png)
+
+127.0.0.1/colx
+![Image of Colx-website](https://github.com/Acroprograming/Colx-Website/blob/master/media/screenshot%20at%2011%20Feb%202020.png)
+
+127.0.0.1/cart
+![Image of Colx-website-cart](https://github.com/Acroprograming/Colx-Website/blob/master/media/Screenshot_2020-02-11%20Colx-cart.png)
+
+127.0.0.1/sell
+![Image of Colx-website-sell](https://github.com/Acroprograming/Colx-Website/blob/master/media/Screenshot_2020-02-11%20Colx-sell.png)
+
+127.0.0.1/buy
+![Image of Colx-website-sell](https://github.com/Acroprograming/Colx-Website/blob/master/media/Screenshot_2020-02-11%20Colx-buy.png)
