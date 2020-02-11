@@ -18,8 +18,8 @@
       <a class="navbar-brand" href="{% url 'colx:index' %}">Colx</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="{% url 'colx:index' %}">Home</a></li>
-      <li><a href="{% url 'colx:sell' %}">Sell</a></li>
+      <li ><a href="{% url 'colx:index' %}">Home</a></li>
+      <li class="active"><a href="{% url 'colx:sell' %}">Sell</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
@@ -43,7 +43,7 @@
     <div class="col-sm-4"></div>
     <div class="col-sm-4">
         <div class="panel panel-default">
-          <div class="panel-heading">Create New Account</div>
+          <div class="panel-heading">Sell new Item</div>
           <div class="panel-body">
              <form action="{% url 'colx:sell' %}" method="post" enctype="multipart/form-data">
               {% csrf_token %}

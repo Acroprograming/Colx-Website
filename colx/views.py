@@ -28,7 +28,11 @@ def cart(request):
 def buy(request,item_no):
 	try:
 		roll_number=request.session['roll_number']
+		student=Student.objects.get(roll_number=roll_number)
 		item=Item.objects.get(item_no=item_no)
+		cart=Cart(itemitem_no=item,studentroll=student)
+		cart.save()
+		messages.success(request,item.item_name+" Added To Cart")
 		return render(request,'colx/buy.html',{'item':item})
 	except KeyError:
 		err="You need to login first"
@@ -120,7 +124,7 @@ def sell(request):
 			price=request.POST['price']
 			description=request.POST['description']
 			fs = FileSystemStorage()
-			filename=fs.save(item_name+seller_obj.roll_number,img)
+			filename=fs.save(item_name+seller_obj.roll_number+img.content_type,img)
 			uploaded_file_url = fs.url(filename)
 			seller_obj=Student.objects.get(id=request.session["id"])
 			item=Item(item_name=item_name,price=price,img=uploaded_file_url,status='not sold',description=description,seller=seller_obj)

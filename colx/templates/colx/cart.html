@@ -8,7 +8,7 @@
   <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">  
   
 </head>
-<body>
+<body style="background-color: #333300">
   {% if request.session.roll_number %}
   <!-- navbaar after login -->
     <!-- navbaar after login-->
@@ -39,7 +39,7 @@
 <!-- navbaar ends -->
 <!-- items shown -->
 <div class="container">
-  <h2>Items In Your Cart</h2>
+  <h2 style="color: white;">Items In Your Cart</h2>
   <div class="row">
         {% if messages %}
               {% for message in messages %}
@@ -49,17 +49,19 @@
                 </div>
               {% endfor %}
         {% endif %}
+        {% if items %}
       {% for item in items %}
 
 
       <div class="col-sm-3">
         <div class="panel panel-default">
-          <div class="panel-heading" ><h4>{{ item.itemitem_no.item_name }}</h4></div>
+          <div class="panel-heading"style="background-color: #808000;" ><h4>{{ item.itemitem_no.item_name }}</h4></div>
             
-          <div class="panel-body" style="background-color: grey;">
+          <div class="panel-body" style="background-color: #325454;">
               
             <img src="{{ item.itemitem_no.img }}" style="height: 300px;width: 225px;"/>
-            <h6 class="text-right"><kbd class="bg-primary">&#8377 {{ item.itemitem_no.price }}</kbd></h6>
+            <h6 class="text-right"><kbd>&#8377 {{ item.itemitem_no.price }}</kbd></h6>
+            <a href="{% url 'colx:buy' item.itemitem_no.item_no %}" class=" btn btn-primary">Buy </a>
           </div>
           <div class="panel-footer  ">{{ item.itemitem_no.description }}
           
@@ -68,6 +70,9 @@
       </div>
       
       {% endfor %}
+      {% else %}
+      <h2 style="color: white;">No Items In Your Cart</h2>
+      {% endif %}
     </div>
 </div>
 <!--js files-->

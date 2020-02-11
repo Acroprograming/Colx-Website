@@ -37,16 +37,29 @@
     {% include 'colx/include/navbar.html' %}
 {% endif%} 
 
- <img src="{{ item.img }}" class="img-rounded" alt="item.item_name" style="width:100%;height: 400px;" >
- <label >Seller: </label>{{ item.seller.fname}} + {{ item.seller.lname}}<br>
-<label>Year: </label>{{ item.seller.year}}<br>
-<label>Class: </label>{{ item.seller.class_field}}<br>
-<label>Section: </label>{{ item.seller.section}}<br>
- <label >Contact info: </label><br>
-<label>Mobile No: </label>{{ item.seller.mobile_no}}<br>
-<label>Email: </label>{{ item.seller.email}}<br>
-<h2>Please contact the Seller to buy the item</h2>
+ 
+ <div class="row">
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8">
+    <div class="panel panel-default">
 
+  <div class="panel-body bg-primary">
+    <center><h2>{{ item.item_name }}</h2></center>
+    <img src="{{ item.img }}" class="img-rounded" alt="item.item_name" style="width:100%;height: 400px;" >
+<h1>Seller Information</h1>
+    <label >Seller: </label>{{ item.seller.fname}} {{ item.seller.lname}}<br>
+  <label>Year: </label>{{ item.seller.year}}<br>
+  <label>Class: </label>{{ item.seller.class_field}}<br>
+  <label>Section: </label>{{ item.seller.section}}<br>
+   <label ><h2>Contact information </h2></label><br>
+  <label>Mobile No: </label>{{ item.seller.mobile_no}}<br>
+  <label>Email: </label>{{ item.seller.email}}<br></div>
+  </center>
+    <div class="panel-footer"><h2>Please contact the Seller to buy the item</h2></div>
+  
+</div>
+  </div>
+  <div class="col-lg-2"></div>
 
  </body>
  </html> 
