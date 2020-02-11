@@ -24,6 +24,16 @@ def cart(request):
 	except Exception as e:
 		messages.error(request,"No Item in Cart" +str(e) )
 		return HttpResponseRedirect(reverse('colx:index'))
+
+def buy(request,item_no):
+	try:
+		roll_number=request.session['roll_number']
+		item=Item.objects.get(item_no=item_no)
+		return render(request,'colx/buy.html',{'item':item})
+	except KeyError:
+		err="You need to login first"
+		form=SignInForm
+		return render(request,'colx/login2.html',{'form': form,'err':err})
 def add_to_cart(request,item_no):
 	try:
 		roll_number=request.session['roll_number']
@@ -110,7 +120,7 @@ def sell(request):
 			price=request.POST['price']
 			description=request.POST['description']
 			fs = FileSystemStorage()
-			filename=fs.save(img.name,img)
+			filename=fs.save(item_name+seller_obj.roll_number,img)
 			uploaded_file_url = fs.url(filename)
 			seller_obj=Student.objects.get(id=request.session["id"])
 			item=Item(item_name=item_name,price=price,img=uploaded_file_url,status='not sold',description=description,seller=seller_obj)

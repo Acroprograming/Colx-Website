@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Colx</title>
+  {% load static %}
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script> 
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">  
+  
+</head>
+<body style="background-color: #325454">
+  {% if request.session.roll_number %}
+  <!-- navbaar after login -->
+    <!-- navbaar after login-->
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'colx:index' %}">Colx</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="{% url 'colx:index' %}">Home</a></li>
+      <li><a href="{% url 'colx:sell' %}">Sell</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+            <a class="btn dropdown-toggle" type="button" data-toggle="dropdown" > {{ request.session.roll_number }} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'colx:cart' %}">Cart</a></li>
+              <li><a href="#">Your orders</a></li>
+              <li><a href="{% url 'colx:logout' %}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav> 
+  {% else %}
+    {% include 'colx/include/navbar.html' %}
+{% endif%} 
+
+ <img src="{{ item.img }}" class="img-rounded" alt="item.item_name" style="width:100%;height: 400px;" >
+ <label >Seller: </label>{{ item.seller.fname}} + {{ item.seller.lname}}<br>
+<label>Year: </label>{{ item.seller.year}}<br>
+<label>Class: </label>{{ item.seller.class_field}}<br>
+<label>Section: </label>{{ item.seller.section}}<br>
+ <label >Contact info: </label><br>
+<label>Mobile No: </label>{{ item.seller.mobile_no}}<br>
+<label>Email: </label>{{ item.seller.email}}<br>
+<h2>Please contact the Seller to buy the item</h2>
+
+
+ </body>
+ </html> 

@@ -10,8 +10,8 @@ from django.db import models
 
 
 class Cart(models.Model):
-    itemitem_no = models.OneToOneField('Item', models.DO_NOTHING, db_column='Itemitem_no', primary_key=True)  # Field name made lowercase.
-    studentroll = models.ForeignKey('Student', models.DO_NOTHING, db_column='Studentroll')  # Field name made lowercase.
+    itemitem_no = models.OneToOneField('Item', db_column='Itemitem_no', primary_key=True,on_delete=models.CASCADE,)  # Field name made lowercase.
+    studentroll = models.ForeignKey('Student', db_column='Studentroll',on_delete=models.CASCADE,)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -25,10 +25,10 @@ class Item(models.Model):
     item_name = models.CharField(max_length=255)
     price = models.IntegerField()
     img = models.CharField(max_length=255)
-    seller = models.ForeignKey('Student', models.DO_NOTHING, db_column='seller',related_name='seller')
+    seller = models.ForeignKey('Student', db_column='seller',related_name='seller',on_delete=models.CASCADE,)
     description = models.CharField(max_length=255, blank=True, null=True)
     status = models.CharField(max_length=255)
-    buyer = models.ForeignKey('Student', models.DO_NOTHING, db_column='buyer', blank=True, null=True,related_name='buyer')
+    buyer = models.ForeignKey('Student', db_column='buyer', blank=True, null=True,related_name='buyer',on_delete=models.SET_NULL)
 
     class Meta:
         managed = False

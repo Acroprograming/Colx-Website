@@ -6,8 +6,9 @@
   <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script> 
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
   <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">  
+  
 </head>
-<body>
+<body style="background-color: #333300">
   {% if request.session.roll_number %}
   <!-- navbaar after login -->
     <!-- navbaar after login-->
@@ -24,20 +25,18 @@
       <li class="dropdown">
             <a class="btn dropdown-toggle" type="button" data-toggle="dropdown" > {{ request.session.roll_number }} <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#">Cart</a></li>
-              <li><a href="#">Your orders</a></li>
+              <li><a href="{% url 'colx:cart' %}"><span class="glyphicon glyphicon-th-list"></span> Cart</a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-lock"></span> Your orders</a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
               <li><a href="{% url 'colx:logout' %}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
             </ul>
-      </li>
-    </ul>
-  </div>
-</nav> 
-
-
-<!-- navbaar ends -->
+          </li>
+        </ul>
+      </div>
+    </nav> 
   {% else %}
- {% include 'colx/include/navbar.html' %}
- {% endif%} 
+    {% include 'colx/include/navbar.html' %}
+{% endif%} 
 <!-- navbaar ends -->
 <!-- items shown -->
 <div class="row">
